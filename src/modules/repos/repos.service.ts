@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRepoDto } from './dto/create-repo.dto';
 import { UpdateRepoDto } from './dto/update-repo.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Repos } from './schemas/repos.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ReposService {
+
+  constructor(@InjectModel(Repos.name) private repoModel: Model<Repos>) { }
+
   create(createRepoDto: CreateRepoDto) {
     return 'This action adds a new repo';
   }
 
-  findAll() {
-    return `This action returns all repos`;
+  async findAll(): Promise<Repos[]> {
+    return this.repoModel.find().exec();
   }
 
   findOne(id: number) {

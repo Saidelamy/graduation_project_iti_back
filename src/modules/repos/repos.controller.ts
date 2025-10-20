@@ -5,7 +5,7 @@ import { UpdateRepoDto } from './dto/update-repo.dto';
 
 @Controller('repos')
 export class ReposController {
-  constructor(private readonly reposService: ReposService) {}
+  constructor(private readonly reposService: ReposService) { }
 
   @Post()
   create(@Body() createRepoDto: CreateRepoDto) {
